@@ -9,7 +9,6 @@ public class GugbabVO {
 	private String userId;
 	private String name;
 	private String password;
-	private String gender;
 	
 	
 	@Override
@@ -17,7 +16,6 @@ public class GugbabVO {
 		System.out.print(userId + " : ");
 		System.out.print(name + " : ");
 		System.out.print(password + " : ");
-		System.out.println(gender + " : ");
 		
 		return null;
 	}

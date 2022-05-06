@@ -28,8 +28,10 @@ public class DataSource {
 			try {
 				Class.forName(driver);
 				conn = DriverManager.getConnection(url, user, password);
+				System.out.println("DB 연결성공!!!");
 			}catch(ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
+				System.out.println("DB 연결실패 ~!");
 			}
 			return conn;
 		}

@@ -32,7 +32,6 @@ public class GugbabServiceImpl implements GugbabService{
 				gugbab.setUserId(rs.getString("userId"));
 				gugbab.setName(rs.getString("name"));
 				gugbab.setPassword(rs.getString("password"));
-				gugbab.setGender(rs.getString("gender"));
 				// 다 읽었으면
 				gugbabs.add(gugbab); //리스트 추가
 			}
@@ -55,7 +54,6 @@ public class GugbabServiceImpl implements GugbabService{
 				vo.setUserId(rs.getString("userid"));
 				vo.setName(rs.getString("name"));
 				vo.setPassword(rs.getString("password"));
-				vo.setGender(rs.getString("gender"));
 			}
 			
 		}catch(SQLException e) {
@@ -68,13 +66,12 @@ public class GugbabServiceImpl implements GugbabService{
 	public int insertGugbab(GugbabVO gugbab) {
 		//한명추가
 		int n = 0;
-		String sql = "INSERT INTO GUGBAB VALUES(?,?,?,?)";
+		String sql = "INSERT INTO GUGBAB VALUES(?,?,?)";
 		try {
 			psmt = conn.prepareCall(sql);
 			psmt.setString(1, gugbab.getUserId());
 			psmt.setString(2, gugbab.getName());
 			psmt.setString(3, gugbab.getPassword());
-			psmt.setString(4, gugbab.getGender());
 			n = psmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -88,12 +85,11 @@ public class GugbabServiceImpl implements GugbabService{
 		//한명 정보 변경
 		int n = 0;
 		String sql = "UPDATE GUGBAB SET USERID = ?, PASSWORD = ?, "
-				+ "GENDER = ? WHERE NAME = ?";
+				+ "WHERE NAME = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, gugbab.getUserId());
 			psmt.setString(2, gugbab.getPassword());
-			psmt.setString(3, gugbab.getGender());
 			psmt.setString(4, gugbab.getName());
 			n = psmt.executeUpdate();
 		}catch(SQLException e) {
@@ -107,7 +103,7 @@ public class GugbabServiceImpl implements GugbabService{
 	public int deleteGugbab(GugbabVO gugbab) {
 		//한명 삭제
 		int n = 0;
-		String sql = "DELETE FROM STUDENT WHERE STUDENTID = ?";
+		String sql = "DELETE FROM GUGBAB WHERE USERID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, gugbab.getUserId());
