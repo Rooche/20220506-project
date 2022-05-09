@@ -6,12 +6,19 @@ public interface GugbabService {
 	
 	List<GugbabVO> selectListGugbab();
 
-	GugbabVO selectGugbab(GugbabVO vo); // 조회
+	GugbabVO selectGugbab(String sId); // 조회
 
 	int insertGugbab(GugbabVO vo); // 추가
 
-	int updateGugbab(GugbabVO vo); // 변경
+	int updateGugbab(String sId); // 변경
 
-	int deleteGugbab(GugbabVO vo); // 삭제
+	int deleteGugbab(String sId); // 삭제
+
+	int login(String userID, String password);
+	
+	int savingMoney(int Money, String id);
+
+	GugbabVO selectGugbab();
+
 
 }

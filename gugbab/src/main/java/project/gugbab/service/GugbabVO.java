@@ -1,10 +1,8 @@
 package project.gugbab.service;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class GugbabVO {
 	private String userId;
 	private String name;
