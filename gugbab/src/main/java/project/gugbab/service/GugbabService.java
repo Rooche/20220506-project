@@ -18,7 +18,7 @@ public interface GugbabService {
 	
 	int savingMoney(int Money, String id);
 
-	GugbabVO selectGugbab();
+//	GugbabVO selectGugbab();
 
 
 }

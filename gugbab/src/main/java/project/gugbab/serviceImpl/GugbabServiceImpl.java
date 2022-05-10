@@ -134,7 +134,7 @@ public class GugbabServiceImpl implements GugbabService {
 	@Override
 	public int login(String userID, String password) {
 		ResultSet rs;
-		String sql = "SELECT PASSWORD FROM GUGBABUSER WHERE ID = ?";
+		String sql = "SELECT PW FROM GUGBABUSER WHERE ID = ?";
 		try {
 			conn = dataSource.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -185,11 +185,4 @@ public class GugbabServiceImpl implements GugbabService {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public GugbabVO selectGugbab() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

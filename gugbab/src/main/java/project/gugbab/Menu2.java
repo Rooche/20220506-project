@@ -19,14 +19,24 @@ public class Menu2 {
 	GugbabService gs = new GugbabServiceImpl();
 	String sId;
 
-	public void run() throws InterruptedException {
+	public void run() throws InterruptedException { // 실행메소드
 		mainMenu();
 	}
 
 	public int mainMenu() throws InterruptedException {
 		boolean a = true;
 		while (a) {
+			System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("				국밥집	 타이쿤 								");
+			System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			String s = "당신은 작은가게의 국밥집 사장이며 가게의 부흥을 위해 열심히 국밥을 팔아야합니다\n\n" + "게임 클리어를 위해서는 가게를 프렌차이즈화 해야한다.\n\n"
+					+ "국밥을 열심히 팔아 돈을 벌고 그 돈으로 가게를 확장합니다\n\n" + "(단, 진상손님은 돈을 내지 않음. )\n\n"
+					+ "지정된 시간안에 가게를 확장하지 못한다면 게임은 실패입니다.\n\n";
 
+			for (int i = 0; i < s.length(); i++) { // 프롤로그 타이핑 효과
+				Thread.sleep(25);
+				System.out.print(s.charAt(i));
+			}
 			System.out.println("┏━━━━━━━━━━━━━━┓");
 			System.out.println("   국 밥 타 이 쿤  ");
 			System.out.println(" 1. 회 원 가 입   ");
@@ -66,7 +76,7 @@ public class Menu2 {
 
 		boolean b = true;
 		while (b) {
-			int money = 0;
+//			int money = 0;
 			System.out.println("┏━━━━━━━━━━━━━━┓");
 			System.out.println(" 1. 게 임 시 작   ");
 			System.out.println(" 2. 정 보 변 경    ");
@@ -75,7 +85,7 @@ public class Menu2 {
 			int menu = sc.nextInt();
 
 			if (menu == 1) {
-				mg.game();
+				mg.gaRun(sId);
 
 				break;
 			} else if (menu == 2) {
@@ -92,7 +102,7 @@ public class Menu2 {
 		boolean c = true;
 		while (c) {
 
-			int money = 0;
+//			int money = 0;
 			System.out.println("┏━━━━━━━━━━━━━━┓");
 			System.out.println(" 1. 비밀번호 변경  ");
 			System.out.println(" 2. 계  정  삭 제 ");
@@ -129,7 +139,6 @@ public class Menu2 {
 	public void gameOver() throws InterruptedException {
 		subMenu(sId);
 	}
-	
 	
 
 }
