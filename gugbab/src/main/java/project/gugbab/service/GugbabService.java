@@ -14,11 +14,11 @@ public interface GugbabService {
 
 	int deleteGugbab(String sId); // 삭제
 
-	int login(String userID, String password);
+	int login(String userID, String password); // 로그인
 	
-	int savingMoney(int Money, String id);
+	int savingMoney(int Money, String id); // 게임종료할때 돈 저장
 
-//	GugbabVO selectGugbab();
+//	int changeStore(String sId); // 아이디값으로 가게확장 저장
 
 
 }

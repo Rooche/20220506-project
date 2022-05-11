@@ -74,7 +74,7 @@ public class GugbabServiceImpl implements GugbabService {
 	public int insertGugbab(GugbabVO gugbab) {
 		// 한명추가
 		int n = 0;
-		String sql = "INSERT INTO GUGBABUSER VALUES(?,?,?)";
+		String sql = "INSERT INTO GUGBABUSER VALUES(?,?,?,0)";
 		try {
 			psmt = conn.prepareCall(sql);
 			psmt.setString(1, gugbab.getUserId());
@@ -92,9 +92,9 @@ public class GugbabServiceImpl implements GugbabService {
 
 	@Override
 	public int updateGugbab(String sId) {
-		// 한명 정보 변경
+		// 비밀번호 변경
 		int n = 0;
-		String sql = "UPDATE GUGBABUSER SET PW = ?, ID = ?";
+		String sql = "UPDATE GUGBABUSER SET PW = ? WHERE ID = ?";
 		try {
 			conn = dataSource.getConnection();
 			psmt = conn.prepareStatement(sql);
@@ -130,6 +130,23 @@ public class GugbabServiceImpl implements GugbabService {
 
 		return n;
 	}
+	
+//	public int changeStore(String sId) {
+//		int n = 0;
+//		String sql = "UPDATE FROM GUGBABSTORE WHERE EXPANSION = ?";
+//		try {
+//			conn = dataSource.getConnection();
+//			psmt = conn.prepareStatement(sql);
+//			psmt.setString(1, sId);
+//			n = psmt.executeUpdate();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close();
+//		}
+//
+//		return n;
+//	}
 
 	@Override
 	public int login(String userID, String password) {
@@ -159,6 +176,7 @@ public class GugbabServiceImpl implements GugbabService {
 	public int savingMoney(int money, String sId) {
 		String sql = "UPDATE GUGBABUSER SET MONEY = MONEY + ? WHERE ID = ?";
 		try {
+			conn = dataSource.getConnection();
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, money);
 			psmt.setString(2, sId);

@@ -56,8 +56,8 @@ public class MainGame extends Thread {
 	}
 
 	private void randomOder() {
-		this.buyporksoup = (int) (3 * (Math.random()));
-		this.buysundaegugbab = (int) (3 * (Math.random()));
+		this.buyporksoup = (int) ((Math.random() * 2) + 1);
+		this.buysundaegugbab = (int) ((Math.random() * 2) + 1);
 
 		if ((buyporksoup + buysundaegugbab) > 0 && (buyporksoup + buysundaegugbab) <= 8) {
 			if (buyporksoup == 0 && buysundaegugbab >= 1) {
@@ -108,16 +108,17 @@ public class MainGame extends Thread {
 				buyGugbab();
 
 			} else if (menu == 3) {
-//				checkMoney();
+				checkMoney();
 
 			} else if (menu == 4) {
 				break;
 
 			} else if (menu == 5) {
-//				store();
+				store();
 
 			} else if (menu == 6) {
 				System.out.println("게임을 종료합니다.");
+				gs.savingMoney(money, sId);
 				p = 99;
 				s = 99;
 			} else {
@@ -149,17 +150,17 @@ public class MainGame extends Thread {
 					} else {
 						System.out.println(" 뚝배기가 부족합니다. ");
 					}
-				} else if (menu == 2) {
-					System.out.println("순대국밥을 얼마나 만드시겠어요?");
-					q = sc.nextInt();
-					sc.nextLine();
-					if (q > 0 && q <= max) {
-						if ((q + sundaegugbab) >= 0 && (q + sundaegugbab) <= 10) {
-							sundaegugbab += q;
-							System.out.println("뜨끈하고 든든한 순대국밥을" + q + "그릇 담아뒀습니다.");
-						} else {
-							System.out.println(" 뚝배기가 부족합니다. ");
-						}
+				}
+			} else if (menu == 2) {
+				System.out.println("순대국밥을 얼마나 만드시겠어요?");
+				q = sc.nextInt();
+				sc.nextLine();
+				if (q > 0 && q <= max) {
+					if ((q + sundaegugbab) >= 0 && (q + sundaegugbab) <= 10) {
+						sundaegugbab += q;
+						System.out.println("뜨끈하고 든든한 순대국밥을" + q + "그릇 담아뒀습니다.");
+					} else {
+						System.out.println(" 뚝배기가 부족합니다. ");
 					}
 				}
 			} else if (menu == 3) {
@@ -172,7 +173,7 @@ public class MainGame extends Thread {
 
 	}
 
-	private void buyGugbab() {
+	private void buyGugbab() { // 국밥을 판매할때
 		if (buyporksoup >= 0 && buysundaegugbab >= 0) {
 			System.out.printf("돼지국밥 %s와 순대국밥%s를 주문했어요!\n", buyporksoup, buysundaegugbab);
 			System.out.println("돼지국밥을 몇개 내어놓겠습니까?");
@@ -184,27 +185,83 @@ public class MainGame extends Thread {
 
 			if (bps1 <= porksoup && bps2 <= sundaegugbab) {
 				if (bps1 == buyporksoup && bps2 == buysundaegugbab) {
-					System.out.println(" 믿고 있었다구 ");
+					System.out.println(" 잘 먹겠습니다. ");
 					porksoup -= bps1;
 					sundaegugbab -= bps2;
-					money = (porksoupprice * bps1) + (sundaegugbab * bps2);
-					evaluation += 5;
+					money = (porksoupprice * bps1) + (sundaegugbabprice * bps2);
+					evaluation += 5; // 똑바로 줬기때문에 평가가 증가함
+					repurchase();
 				} else if (bps1 == buyporksoup && bps2 < buysundaegugbab) {
-					System.out.printf(" 돼지국밥 주문 똑바로 받으세요 %d개만큼 없잖아요\n ", buysundaegugbab - bps2);
+					System.out.printf(" 국밥 주문 똑바로 받으세요 %d개만큼 없잖아요\n ", buysundaegugbab - bps2);
 					porksoup -= bps1;
 					sundaegugbab -= bps2;
-					money = (porksoupprice * bps1) + (sundaegugbab * bps2);
-					evaluation -= 10;
+					money = (porksoupprice * bps1) + (sundaegugbabprice * bps2);
+					evaluation -= 10; // 제대로 주지 않았기에 평가가 감소함
+					repurchase();
 				} else if (bps1 == buyporksoup && bps2 > buysundaegugbab) {
-					System.out.printf(" 잘나가는데에는 이유가 다 있다니깐 \n");
+					System.out.printf("제가 돼지로 보이시나요 ?\n");
 					porksoup -= bps1;
 					sundaegugbab -= bps2;
-					money = (porksoupprice * bps1) + (sundaegugbab * bps2);
-					evaluation += 1;
-				}// else if(bps1 )
+					money = (porksoupprice * bps1) + (sundaegugbabprice * bps2);
+					evaluation -= 10; // 원하는거 이상줬기때문에 평가가 감소함
+					repurchase();
+				} else if (bps1 < porksoup && bps2 == sundaegugbab) {
+					System.out.printf("국밥 주문 똑바로 받으세요 %d개만큼 없잖아요\n", porksoup - bps1);
+					porksoup -= bps1;
+					sundaegugbab -= bps2;
+					money = (porksoupprice * bps1) + (sundaegugbabprice * bps2);
+					evaluation -= 10; // 제대로 주지 않았기에 평가가 감소함
+					repurchase();
+				} else if (bps1 > porksoup && bps2 == sundaegugbab) {
+					System.out.printf("제가 돼지로 보이시나요 ?\n");
+					porksoup -= bps1;
+					sundaegugbab -= bps2;
+					money = (porksoupprice * bps1) + (sundaegugbabprice * bps2);
+					evaluation -= 10; // 원하는거 이상줬기때문에 평가가 감소함
+					repurchase();
+				}
+			} else {
+				System.out.println(" 국밥을 더 만들어야합니다. ");
 			}
 
+		} else if (buyporksoup == -1 && buysundaegugbab == -1) {
+			System.out.println(" 아시죠 ? ");
 		}
 	}
 
+	private void checkMoney() {
+		System.out.printf("현재 장사로 수익 :  %9d \n", money);
+	}
+
+	public void store() throws InterruptedException {
+		boolean a = true;
+		Thread.sleep(1000);
+		String t = "━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━\n";
+		for (int i = 0; i < t.length(); i++) {
+			Thread.sleep(25);
+			System.out.print(t.charAt(i));
+		}
+		while(a) {
+			System.out.println(
+					"- - - - - - - - - - - - - - - - - - 상 점 - - - - - - - - - - - - - - - - - - - - - - - -\n");
+			System.out.println("(1) 조금 큰 가게로 확장하기	(2) 큰 가게로 확장하기	(3) 프렌차이즈화 (4) 돌아가기");
+			System.out.println(
+					"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+			int menu = sc.nextInt();
+			sc.nextLine();
+
+			if (menu == 1) {
+			
+
+			} else if (menu == 2) {
+		
+
+			} else if (menu == 3) {
+			
+			} else if (menu == 4) {
+				a = false;
+				break;
+			}
+		}
+	}
 }

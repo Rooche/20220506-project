@@ -80,7 +80,7 @@ public class Menu2 {
 			System.out.println("┏━━━━━━━━━━━━━━┓");
 			System.out.println(" 1. 게 임 시 작   ");
 			System.out.println(" 2. 정 보 변 경    ");
-			System.out.println(" 3. 종	료 		");
+			System.out.println(" 3. 종	료 	");
 			System.out.println("┗━━━━━━━━━━━━━━┛");
 			int menu = sc.nextInt();
 
@@ -91,7 +91,8 @@ public class Menu2 {
 			} else if (menu == 2) {
 				menu = mainUser(sId);
 			} else if (menu == 3) {
-				System.out.println("프로그램을 종료합니다");
+				System.out.println("게임을 종료합니다");
+				b = false;
 				break;
 			}
 		}
