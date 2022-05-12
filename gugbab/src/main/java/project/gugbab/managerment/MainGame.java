@@ -9,15 +9,17 @@ public class MainGame extends Thread {
 //	private GugbabService dao = new GugbabServiceImpl();
 	private Scanner sc = new Scanner(System.in);
 	GugbabService gs = new GugbabServiceImpl();
+	Timer tm = new Timer();
 	String sId = "";
 	int porksoupprice = 500; // 돼지국밥 가격
 	int sundaegugbabprice = 600; // 순대국밥
 	int porksoup, sundaegugbab = 0; // 팔아야하는 돼지, 순대 / 가게가 작을땐 5 ~ 6개로 생각 커지면 10개로 늘어날듯
 	int buyporksoup, buysundaegugbab = 0; // 랜덤으로 손님이 구입할것
-
+	int time;
+	
 	int max = 6;
 	private int money = 0; // 시작시 돈
-	private int evaluation = 0; // 가게 평가 안쓸수도 있음
+	private int evaluation = 10; // 가게 평가 안쓸수도 있음
 
 	String[] people = { "어린아이", "어른", "노인", "진상손님" }; // 손님의 종류는 4명
 	int p = 0; // 최대 받을수있는 손님수를 세야함
@@ -29,9 +31,8 @@ public class MainGame extends Thread {
 		int sum = 0;
 		int money = 0;
 
-		while (p < 6) { // 작은 가게일때는 최대 6명만 손님을 받음
+		while (p < 1) { // 작은 가게일때는 최대 6명만 손님을 받음
 			try {
-//				numPeople();
 				System.out.println(randomPeople() + "손님이 가게를 방문했습니다");
 				randomOder();
 				join();
@@ -47,9 +48,6 @@ public class MainGame extends Thread {
 		return money;
 	}
 
-//	private void numPeople() {
-//		System.out.println((++p) + "번째 손님");
-//	}
 
 	private String randomPeople() { // 어린아이, 어른, 노인 , 진상손님까지 랜덤출현
 		return (people[(int) (4 * (Math.random()))]);
@@ -185,14 +183,14 @@ public class MainGame extends Thread {
 
 			if (bps1 <= porksoup && bps2 <= sundaegugbab) {
 				if (bps1 == buyporksoup && bps2 == buysundaegugbab) {
-					System.out.println(" 잘 먹겠습니다. ");
+					System.out.println("잘 먹겠습니다.");
 					porksoup -= bps1;
 					sundaegugbab -= bps2;
 					money = (porksoupprice * bps1) + (sundaegugbabprice * bps2);
 					evaluation += 5; // 똑바로 줬기때문에 평가가 증가함
 					repurchase();
 				} else if (bps1 == buyporksoup && bps2 < buysundaegugbab) {
-					System.out.printf(" 국밥 주문 똑바로 받으세요 %d개만큼 없잖아요\n ", buysundaegugbab - bps2);
+					System.out.printf("국밥 주문 똑바로 받으세요 %d개만큼 없잖아요\n ", buysundaegugbab - bps2);
 					porksoup -= bps1;
 					sundaegugbab -= bps2;
 					money = (porksoupprice * bps1) + (sundaegugbabprice * bps2);
@@ -221,16 +219,17 @@ public class MainGame extends Thread {
 					repurchase();
 				}
 			} else {
-				System.out.println(" 국밥을 더 만들어야합니다. ");
+				System.out.println("국밥을 더 만들어야합니다. ");
 			}
 
 		} else if (buyporksoup == -1 && buysundaegugbab == -1) {
-			System.out.println(" 아시죠 ? ");
+			System.out.println("변경해주세요 ");
 		}
 	}
 
 	private void checkMoney() {
 		System.out.printf("현재 장사로 수익 :  %9d \n", money);
+		System.out.printf("현재 가게 평가도 : %4d \n", evaluation);
 	}
 
 	public void store() throws InterruptedException {
@@ -257,7 +256,8 @@ public class MainGame extends Thread {
 		
 
 			} else if (menu == 3) {
-			
+				System.out.println("축하합니다. 당신은 게임을 클리어 하였습니다.");
+				break;
 			} else if (menu == 4) {
 				a = false;
 				break;

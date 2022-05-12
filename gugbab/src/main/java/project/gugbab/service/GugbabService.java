@@ -18,7 +18,9 @@ public interface GugbabService {
 	
 	int savingMoney(int Money, String id); // 게임종료할때 돈 저장
 
-//	int changeStore(String sId); // 아이디값으로 가게확장 저장
+	int canUseMoney(String sId); // 저장한 돈을 다시 불러오는 기능
+	
+	int changeStore(String sId); // 아이디값으로 가게확장 저장
 
 
 }

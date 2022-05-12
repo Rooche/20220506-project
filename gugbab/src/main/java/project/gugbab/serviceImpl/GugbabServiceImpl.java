@@ -35,6 +35,7 @@ public class GugbabServiceImpl implements GugbabService {
 				gugbab.setUserId(rs.getString("userId"));
 				gugbab.setName(rs.getString("name"));
 				gugbab.setPassword(rs.getString("password"));
+				gugbab.setMoney(rs.getInt("money"));
 				// 다 읽었으면
 				gugbabs.add(gugbab); // 리스트 추가
 			}
@@ -131,22 +132,22 @@ public class GugbabServiceImpl implements GugbabService {
 		return n;
 	}
 	
-//	public int changeStore(String sId) {
-//		int n = 0;
-//		String sql = "UPDATE FROM GUGBABSTORE WHERE EXPANSION = ?";
-//		try {
-//			conn = dataSource.getConnection();
-//			psmt = conn.prepareStatement(sql);
-//			psmt.setString(1, sId);
-//			n = psmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close();
-//		}
-//
-//		return n;
-//	}
+	public int changeStore(String sId) {
+		int n = 0;
+		String sql = "UPDATE FROM GUGBABSTORE WHERE EXPANSION = ?";
+		try {
+			conn = dataSource.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, sId);
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return n;
+	}
 
 	@Override
 	public int login(String userID, String password) {
@@ -189,6 +190,31 @@ public class GugbabServiceImpl implements GugbabService {
 		}
 		return -2;
 
+	}
+	
+	public int canUseMoney(String sId) {
+		int useMoney = 0;
+		String sql = "SELECT MONEY FROM GUGBABUSER WHERE ID = ?";
+		GugbabVO vo;
+		try {
+			conn = dataSource.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, sId);
+			psmt.executeQuery();
+
+			if (rs.next()) {
+				vo = new GugbabVO();
+				vo.setMoney(rs.getInt("money"));
+
+				useMoney = vo.getMoney();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return useMoney;
 	}
 
 	private void close() {
