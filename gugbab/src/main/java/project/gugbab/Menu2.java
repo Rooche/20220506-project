@@ -46,9 +46,11 @@ public class Menu2 {
 			int menu = sc.nextInt();
 
 			if (menu == 1) {
+				mg.clearScreen();
 				gb.insertGugbab();
 
 			} else if (menu == 2) {
+				mg.clearScreen();
 				System.out.println("ID를 입력해주세요.");
 				sId = sc.next();
 				System.out.println("비밀번호를 입력해주세요.");
@@ -76,7 +78,8 @@ public class Menu2 {
 
 		boolean b = true;
 		while (b) {
-//			int money = 0;
+			mg.clearScreen();
+			int money = 0;
 			System.out.println("┏━━━━━━━━━━━━━━┓");
 			System.out.println(" 1. 게 임 시 작   ");
 			System.out.println(" 2. 정 보 변 경    ");
@@ -85,10 +88,12 @@ public class Menu2 {
 			int menu = sc.nextInt();
 
 			if (menu == 1) {
+				mg.clearScreen();
 				mg.gaRun(sId);
 
 				break;
 			} else if (menu == 2) {
+				mg.clearScreen();
 				menu = mainUser(sId);
 			} else if (menu == 3) {
 				System.out.println("게임을 종료합니다");
@@ -102,8 +107,8 @@ public class Menu2 {
 	private int mainUser(String sId) throws InterruptedException {
 		boolean c = true;
 		while (c) {
-
-//			int money = 0;
+			mg.clearScreen();
+			int money = 0;
 			System.out.println("┏━━━━━━━━━━━━━━┓");
 			System.out.println(" 1. 비밀번호 변경  ");
 			System.out.println(" 2. 계  정  삭 제 ");
@@ -112,6 +117,7 @@ public class Menu2 {
 			int menu = sc.nextInt();
 
 			if (menu == 1) {
+				mg.clearScreen();
 				int result = gs.updateGugbab(sId);
 				if (result == 1) {
 					System.out.println("비밀번호 변경 성공");
@@ -120,6 +126,7 @@ public class Menu2 {
 				}
 				continue;
 			} else if (menu == 2) {
+				mg.clearScreen();
 				gs.deleteGugbab(sId);
 				System.out.println("계정을 삭제했습니다.");
 				return mainMenu();
