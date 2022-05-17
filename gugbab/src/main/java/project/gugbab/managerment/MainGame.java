@@ -240,7 +240,7 @@ public class MainGame extends Thread {
 					repurchase();
 
 					if (evaluation > 50) {
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 						String t = "평가도가 최상까지 올랐습니다. 가게는 매우 장사가 잘되어 프렌차이즈화가 되었습니다\n\n"
 								+ "⠀⠀⣴⣶⣶⣶⣶⣶⣶⣶⢶⣶⠀⠀⠀⠀⢰⠶⣶⣶⣶⣶⢶⣶⣦⠀⠀⣶⣶⣶⡄⠀⠀⢰⣶⣶⣶⡶⣶⣶⣶⣶⣤⣶⣶⣶⣶⣶⣦⠀ \n"
 								+ "⠀⢸⠉⠈⣶⠿⠖⠒⢶⡎⠀⢸⡇⠀⠀⠀⢸⠀⠉⣶⠖⠒⠾⠶⠟⠀⢀⡟⡈⠀⢻⡀⠀⢸⠉⠀⣶⠶⠒⠲⣿⠈⢸⡏⠉⣿⡇⠈⣿⠀\n"
@@ -271,7 +271,7 @@ public class MainGame extends Thread {
 					repurchase();
 
 					if (evaluation < -1) {
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 						String t = "평가도가 최하로 떨어져 가게가 망해서 폐업했습니다.\n\n" 
 								+ "당신은 게임클리어에 실패했습니다.\n\n"
 								+ "⠀⠀⠀⠀⠀⣀⣤⣶⣴⣤⣠⡀⠀⠀⠀⠀⠀⠀⣠⣤⢠⢐⡄⠀⠀⢀⣤⢀⡀⠀⠀⠀⢀⣤⡄⢀⠀⠀⡀⣄⣦⣶⣶⣶⣄⠀⠀⠀⠀⠀\n"
@@ -308,7 +308,7 @@ public class MainGame extends Thread {
 					repurchase();
 
 					if (evaluation < -1) {
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 						String t = "평가도가 최하로 떨어져 가게가 망해서 폐업했습니다.\n\n" 
 								+ "게임클리어에 실패했습니다.\n\n"
 								+ "⠀⠀⠀⠀⠀⣀⣤⣶⣴⣤⣠⡀⠀⠀⠀⠀⠀⠀⣠⣤⢠⢐⡄⠀⠀⢀⣤⢀⡀⠀⠀⠀⢀⣤⡄⢀⠀⠀⡀⣄⣦⣶⣶⣶⣄⠀⠀⠀⠀⠀\n"
@@ -344,7 +344,7 @@ public class MainGame extends Thread {
 					evaluation -= 10; // 제대로 주지 않았기에 평가가 감소함
 					repurchase();
 					if (evaluation < -1) {
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 						String t = "평가도가 최하로 떨어져 가게가 망해서 폐업했습니다.\n\n" 
 								+ "게임클리어에 실패했습니다.\n\n"
 								+ "⠀⠀⠀⠀⠀⣀⣤⣶⣴⣤⣠⡀⠀⠀⠀⠀⠀⠀⣠⣤⢠⢐⡄⠀⠀⢀⣤⢀⡀⠀⠀⠀⢀⣤⡄⢀⠀⠀⡀⣄⣦⣶⣶⣶⣄⠀⠀⠀⠀⠀\n"
@@ -381,7 +381,7 @@ public class MainGame extends Thread {
 					repurchase();
 
 					if (evaluation < -1) {
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 						String t = "평가도가 최하로 떨어져 가게가 망해서 폐업했습니다.\n\n" 
 								+ "게임클리어에 실패했습니다.\n\n"
 								+ "⠀⠀⠀⠀⠀⣀⣤⣶⣴⣤⣠⡀⠀⠀⠀⠀⠀⠀⣠⣤⢠⢐⡄⠀⠀⢀⣤⢀⡀⠀⠀⠀⢀⣤⡄⢀⠀⠀⡀⣄⣦⣶⣶⣶⣄⠀⠀⠀⠀⠀\n"
